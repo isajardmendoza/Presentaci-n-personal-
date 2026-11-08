@@ -1,0 +1,1267 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Isajar Mendoza Maldonado | Software Developer Portfolio</title>
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                bg: "#090d16",
+                surface: "#111827",
+                card: "#161f33",
+                border: "#26334d",
+                cyan: "#00f2fe",
+                blue: "#4facfe",
+                accent: "#6366f1",
+                violet: "#a855f7",
+              },
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              mono: ["JetBrains Mono", "Fira Code", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      body {
+        background-color: #090d16;
+        color: #e2e8f0;
+        font-family: "Inter", sans-serif;
+        overflow-x: hidden;
+      }
+
+      .glass-panel {
+        background: rgba(22, 31, 51, 0.7);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .glass-card {
+        background: rgba(22, 31, 51, 0.5);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .glass-card:hover {
+        border-color: rgba(79, 172, 254, 0.4);
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px -10px rgba(79, 172, 254, 0.15);
+      }
+
+      .nav-btn.active {
+        background: linear-gradient(
+          135deg,
+          rgba(79, 172, 254, 0.2),
+          rgba(168, 85, 247, 0.2)
+        );
+        border-color: rgba(79, 172, 254, 0.5);
+        color: #00f2fe;
+      }
+
+      .page-section {
+        display: none;
+        animation: fadeIn 0.4s ease-out forwards;
+      }
+
+      .page-section.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: #090d16;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #26334d;
+        border-radius: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #4facfe;
+      }
+    </style>
+  </head>
+  <body
+    class="min-h-screen flex flex-col justify-between custom-scrollbar selection:bg-brand-blue/30 selection:text-brand-cyan"
+  >
+    <!-- Header / Navigation -->
+    <header
+      class="sticky top-0 z-50 glass-panel border-b border-brand-border/50 px-4 lg:px-8 py-3.5"
+    >
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <!-- Brand Logo -->
+        <a
+          href="#inicio"
+          onclick="navigateTo('inicio')"
+          class="flex items-center gap-3 group"
+        >
+          <div
+            class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-blue to-brand-violet flex items-center justify-center text-white font-mono font-bold text-lg shadow-lg shadow-brand-blue/20 group-hover:scale-105 transition-transform"
+          >
+            IM
+          </div>
+          <div>
+            <span
+              class="font-bold text-white tracking-wide block text-sm sm:text-base group-hover:text-brand-cyan transition-colors"
+              >Isajar Mendoza</span
+            >
+            <span class="text-xs text-slate-400 font-mono block"
+              >Dev & Software Analyst</span
+            >
+          </div>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav
+          class="hidden md:flex items-center gap-1 bg-brand-surface/80 p-1.5 rounded-2xl border border-brand-border/60"
+        >
+          <button
+            onclick="navigateTo('inicio')"
+            id="nav-inicio"
+            class="nav-btn active px-4 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-2 border border-transparent"
+          >
+            <i class="fa-solid fa-house"></i> Inicio
+          </button>
+          <button
+            onclick="navigateTo('sobre-mi')"
+            id="nav-sobre-mi"
+            class="nav-btn px-4 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-2 border border-transparent"
+          >
+            <i class="fa-solid fa-user"></i> Sobre Mí
+          </button>
+          <button
+            onclick="navigateTo('experiencia')"
+            id="nav-experiencia"
+            class="nav-btn px-4 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-2 border border-transparent"
+          >
+            <i class="fa-solid fa-briefcase"></i> Experiencia
+          </button>
+          <button
+            onclick="navigateTo('educacion')"
+            id="nav-educacion"
+            class="nav-btn px-4 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-2 border border-transparent"
+          >
+            <i class="fa-solid fa-graduation-cap"></i> Educación
+          </button>
+          <button
+            onclick="navigateTo('referencias')"
+            id="nav-referencias"
+            class="nav-btn px-4 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-2 border border-transparent"
+          >
+            <i class="fa-solid fa-users"></i> Referencias
+          </button>
+          <button
+            onclick="navigateTo('contacto')"
+            id="nav-contacto"
+            class="nav-btn px-4 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white transition-all flex items-center gap-2 border border-transparent"
+          >
+            <i class="fa-solid fa-address-book"></i> Contacto
+          </button>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button
+          onclick="toggleMobileMenu()"
+          class="md:hidden w-10 h-10 rounded-xl bg-brand-surface border border-brand-border flex items-center justify-center text-slate-300 hover:text-white"
+        >
+          <i class="fa-solid fa-bars text-lg" id="menu-icon"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Nav Dropdown -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden mt-3 pt-3 border-t border-brand-border/50 flex flex-col gap-2"
+      >
+        <button
+          onclick="
+            navigateTo('inicio');
+            toggleMobileMenu();
+          "
+          class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-brand-surface hover:text-brand-cyan transition-colors flex items-center gap-3"
+        >
+          <i class="fa-solid fa-house w-5 text-brand-blue"></i> Inicio
+        </button>
+        <button
+          onclick="
+            navigateTo('sobre-mi');
+            toggleMobileMenu();
+          "
+          class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-brand-surface hover:text-brand-cyan transition-colors flex items-center gap-3"
+        >
+          <i class="fa-solid fa-user w-5 text-brand-blue"></i> Sobre Mí
+        </button>
+        <button
+          onclick="
+            navigateTo('experiencia');
+            toggleMobileMenu();
+          "
+          class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-brand-surface hover:text-brand-cyan transition-colors flex items-center gap-3"
+        >
+          <i class="fa-solid fa-briefcase w-5 text-brand-blue"></i> Experiencia
+        </button>
+        <button
+          onclick="
+            navigateTo('educacion');
+            toggleMobileMenu();
+          "
+          class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-brand-surface hover:text-brand-cyan transition-colors flex items-center gap-3"
+        >
+          <i class="fa-solid fa-graduation-cap w-5 text-brand-blue"></i>
+          Educación
+        </button>
+        <button
+          onclick="
+            navigateTo('referencias');
+            toggleMobileMenu();
+          "
+          class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-brand-surface hover:text-brand-cyan transition-colors flex items-center gap-3"
+        >
+          <i class="fa-solid fa-users w-5 text-brand-blue"></i> Referencias
+        </button>
+        <button
+          onclick="
+            navigateTo('contacto');
+            toggleMobileMenu();
+          "
+          class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-brand-surface hover:text-brand-cyan transition-colors flex items-center gap-3"
+        >
+          <i class="fa-solid fa-address-book w-5 text-brand-blue"></i> Contacto
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 lg:px-8 py-8 lg:py-12 flex-1 w-full">
+      <!-- PAGE 1: INICIO / HERO -->
+      <section id="page-inicio" class="page-section active space-y-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+            <div
+              class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-surface border border-brand-border text-xs text-brand-cyan font-mono"
+            >
+              <span
+                class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"
+              ></span>
+              Disponible para proyectos y vacantes
+            </div>
+
+            <h1
+              class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight"
+            >
+              Desarrollador de Software <br />
+              <span
+                class="bg-gradient-to-r from-brand-cyan via-brand-blue to-brand-violet bg-clip-text text-transparent"
+              >
+                Java & SQL Specialist
+              </span>
+            </h1>
+
+            <p
+              class="text-slate-400 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0"
+            >
+              Tecnólogo en Análisis y Desarrollo de Software (SENA) enfocado en
+              la construcción de soluciones sólidas, escalables e interfaces web
+              eficientes. Experto en backend con Java/SQL y desarrollo frontend
+              responsivo.
+            </p>
+
+            <!-- Action Buttons -->
+            <div
+              class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2"
+            >
+              <button
+                onclick="navigateTo('experiencia')"
+                class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-brand-blue to-brand-violet text-white font-semibold text-sm hover:opacity-90 transition-all shadow-lg shadow-brand-blue/20 flex items-center gap-2"
+              >
+                Ver Experiencia <i class="fa-solid fa-arrow-right text-xs"></i>
+              </button>
+              <button
+                onclick="navigateTo('contacto')"
+                class="px-6 py-3.5 rounded-xl bg-brand-surface border border-brand-border text-slate-200 font-semibold text-sm hover:border-brand-blue hover:text-brand-cyan transition-all flex items-center gap-2"
+              >
+                <i class="fa-solid fa-address-book"></i> Ver Contacto
+              </button>
+            </div>
+
+            <!-- Quick Contacts Badges -->
+            <div
+              class="pt-4 flex flex-wrap justify-center lg:justify-start gap-4 text-xs font-mono text-slate-400"
+            >
+              <div
+                class="flex items-center gap-2 bg-brand-surface/60 px-3 py-1.5 rounded-lg border border-brand-border/40"
+              >
+                <i class="fa-solid fa-location-dot text-brand-cyan"></i>
+                Barranquilla, Colombia
+              </div>
+              <div
+                class="flex items-center gap-2 bg-brand-surface/60 px-3 py-1.5 rounded-lg border border-brand-border/40"
+              >
+                <i class="fa-solid fa-envelope text-brand-cyan"></i>
+                isajardmendoza@gmail.com
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Side: Tech Stack Showcase -->
+          <div class="lg:col-span-5">
+            <div
+              class="glass-panel p-6 sm:p-8 rounded-3xl relative overflow-hidden space-y-6"
+            >
+              <div
+                class="absolute top-0 right-0 w-32 h-32 bg-brand-cyan/10 rounded-full blur-3xl pointer-events-none"
+              ></div>
+
+              <div
+                class="flex items-center justify-between border-b border-brand-border/60 pb-4"
+              >
+                <span
+                  class="text-xs font-mono text-brand-cyan uppercase tracking-wider font-semibold"
+                  >Stack Principal</span
+                >
+                <span class="text-xs font-mono text-slate-400"
+                  >2026 Profile</span
+                >
+              </div>
+
+              <div class="space-y-4">
+                <!-- Java -->
+                <div>
+                  <div class="flex justify-between text-xs font-mono mb-1.5">
+                    <span class="text-white font-medium flex items-center gap-2"
+                      ><i class="fa-brands fa-java text-orange-400 text-sm"></i>
+                      Java</span
+                    >
+                    <span class="text-brand-cyan">Avanzado</span>
+                  </div>
+                  <div
+                    class="h-2 w-full bg-brand-surface rounded-full overflow-hidden border border-brand-border/40"
+                  >
+                    <div
+                      class="h-full bg-gradient-to-r from-orange-500 to-amber-400 w-11/12 rounded-full"
+                    ></div>
+                  </div>
+                </div>
+
+                <!-- SQL & Databases -->
+                <div>
+                  <div class="flex justify-between text-xs font-mono mb-1.5">
+                    <span class="text-white font-medium flex items-center gap-2"
+                      ><i
+                        class="fa-solid fa-database text-brand-blue text-sm"
+                      ></i>
+                      SQL / Bases de Datos</span
+                    >
+                    <span class="text-brand-cyan">Avanzado</span>
+                  </div>
+                  <div
+                    class="h-2 w-full bg-brand-surface rounded-full overflow-hidden border border-brand-border/40"
+                  >
+                    <div
+                      class="h-full bg-gradient-to-r from-brand-blue to-brand-cyan w-11/12 rounded-full"
+                    ></div>
+                  </div>
+                </div>
+
+                <!-- Web Dev -->
+                <div>
+                  <div class="flex justify-between text-xs font-mono mb-1.5">
+                    <span class="text-white font-medium flex items-center gap-2"
+                      ><i class="fa-brands fa-js text-yellow-400 text-sm"></i>
+                      JavaScript / HTML / CSS</span
+                    >
+                    <span class="text-brand-cyan">Intermedio-Alto</span>
+                  </div>
+                  <div
+                    class="h-2 w-full bg-brand-surface rounded-full overflow-hidden border border-brand-border/40"
+                  >
+                    <div
+                      class="h-full bg-gradient-to-r from-yellow-400 to-brand-cyan w-4/5 rounded-full"
+                    ></div>
+                  </div>
+                </div>
+
+                <!-- Web Management / CMS -->
+                <div>
+                  <div class="flex justify-between text-xs font-mono mb-1.5">
+                    <span class="text-white font-medium flex items-center gap-2"
+                      ><i
+                        class="fa-solid fa-globe text-brand-violet text-sm"
+                      ></i>
+                      Gestión Web & CRM</span
+                    >
+                    <span class="text-brand-cyan">Experto</span>
+                  </div>
+                  <div
+                    class="h-2 w-full bg-brand-surface rounded-full overflow-hidden border border-brand-border/40"
+                  >
+                    <div
+                      class="h-full bg-gradient-to-r from-brand-violet to-pink-500 w-5/6 rounded-full"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Stats Bar -->
+              <div
+                class="grid grid-cols-2 gap-4 pt-4 border-t border-brand-border/60"
+              >
+                <div
+                  class="bg-brand-surface/80 p-3.5 rounded-2xl border border-brand-border/40 text-center"
+                >
+                  <div class="text-xl font-bold text-white">SENA</div>
+                  <div class="text-[11px] text-slate-400 font-mono">
+                    ADSO Tecnólogo
+                  </div>
+                </div>
+                <div
+                  class="bg-brand-surface/80 p-3.5 rounded-2xl border border-brand-border/40 text-center"
+                >
+                  <div class="text-xl font-bold text-brand-cyan">2+ Años</div>
+                  <div class="text-[11px] text-slate-400 font-mono">
+                    Experiencia Aplicada
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Highlights Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
+          <div
+            class="glass-card p-6 rounded-2xl space-y-3 text-center md:text-left"
+          >
+            <div
+              class="w-12 h-12 rounded-xl bg-brand-blue/10 border border-brand-blue/20 flex items-center justify-center text-brand-cyan text-xl mx-auto md:mx-0"
+            >
+              <i class="fa-solid fa-code"></i>
+            </div>
+            <h3 class="text-lg font-bold text-white">Desarrollo Robusto</h3>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Codificación limpia en Java y modelado estructurado de bases de
+              datos relacionales en SQL para soluciones backend.
+            </p>
+          </div>
+
+          <div
+            class="glass-card p-6 rounded-2xl space-y-3 text-center md:text-left"
+          >
+            <div
+              class="w-12 h-12 rounded-xl bg-brand-violet/10 border border-brand-violet/20 flex items-center justify-center text-brand-violet text-xl mx-auto md:mx-0"
+            >
+              <i class="fa-solid fa-laptop-code"></i>
+            </div>
+            <h3 class="text-lg font-bold text-white">Interfaces & CRM</h3>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Experiencia en maquetación frontend (HTML, CSS, JS) y
+              administración integral de páginas web y plataformas CRM
+              corporativas.
+            </p>
+          </div>
+
+          <div
+            class="glass-card p-6 rounded-2xl space-y-3 text-center md:text-left"
+          >
+            <div
+              class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-xl mx-auto md:mx-0"
+            >
+              <i class="fa-solid fa-brain"></i>
+            </div>
+            <h3 class="text-lg font-bold text-white">Solución de Problemas</h3>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Enfoque analítico en entornos dinámicos, orientado a la mejora
+              continua, metrología y desarrollo a medida.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 2: SOBRE MÍ -->
+      <section id="page-sobre-mi" class="page-section space-y-8">
+        <div class="border-b border-brand-border/60 pb-6 text-center">
+          <span
+            class="text-xs font-mono text-brand-cyan uppercase tracking-wider font-semibold"
+            >Perfil Profesional</span
+          >
+          <h2 class="text-3xl font-extrabold text-white mt-1">Sobre Mí</h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <!-- Main Description -->
+          <div class="lg:col-span-8 space-y-6">
+            <div class="glass-panel p-6 sm:p-8 rounded-3xl space-y-4">
+              <h3
+                class="text-xl font-bold text-white flex items-center justify-center sm:justify-start gap-3"
+              >
+                <i class="fa-solid fa-user-gear text-brand-blue"></i>
+                Resumen Perfil
+              </h3>
+              <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+                Desarrollador de Software enfocado en la construcción de
+                soluciones robustas y escalables. Experto en la codificación,
+                diseño y soporte de aplicaciones utilizando
+                <strong>Java</strong> y manipulación avanzada de datos con
+                <strong>SQL</strong>.
+              </p>
+              <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+                Complemento mi perfil técnico con habilidades avanzadas en
+                <strong>JavaScript, HTML y CSS</strong> para el desarrollo de
+                interfaces responsivas e intuitivas. Apasionado por la calidad
+                del código, el aprendizaje continuo y la resolución creativa de
+                problemas en entornos de trabajo dinámicos.
+              </p>
+            </div>
+
+            <!-- Languages section -->
+            <div class="glass-card p-6 rounded-2xl space-y-4">
+              <h3
+                class="text-lg font-bold text-white flex items-center justify-center sm:justify-start gap-3"
+              >
+                <i class="fa-solid fa-language text-brand-violet"></i>
+                Idiomas
+              </h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div
+                  class="bg-brand-surface p-4 rounded-xl border border-brand-border/60 flex items-center justify-between"
+                >
+                  <div>
+                    <span class="text-white font-semibold block text-sm"
+                      >Inglés</span
+                    >
+                    <span class="text-xs text-slate-400 font-mono"
+                      >Competencia técnica / lectura</span
+                    >
+                  </div>
+                  <span
+                    class="px-2.5 py-1 rounded-lg bg-brand-blue/10 border border-brand-blue/30 text-brand-cyan text-xs font-mono"
+                    >B1/B2</span
+                  >
+                </div>
+                <div
+                  class="bg-brand-surface p-4 rounded-xl border border-brand-border/60 flex items-center justify-between"
+                >
+                  <div>
+                    <span class="text-white font-semibold block text-sm"
+                      >Portugués</span
+                    >
+                    <span class="text-xs text-slate-400 font-mono"
+                      >Nivel elemental</span
+                    >
+                  </div>
+                  <span
+                    class="px-2.5 py-1 rounded-lg bg-brand-violet/10 border border-brand-violet/30 text-brand-violet text-xs font-mono"
+                    >Básico</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sidebar / Meta Details -->
+          <div class="lg:col-span-4 space-y-6">
+            <div class="glass-card p-6 rounded-3xl space-y-4">
+              <h3
+                class="text-lg font-bold text-white border-b border-brand-border/60 pb-3 text-center sm:text-left"
+              >
+                Detalles Personales
+              </h3>
+
+              <div class="space-y-3 text-xs sm:text-sm">
+                <div>
+                  <span class="text-slate-400 block text-xs"
+                    >Nombre Completo:</span
+                  >
+                  <span class="text-white font-medium"
+                    >Isajar Mendoza Maldonado</span
+                  >
+                </div>
+                <div>
+                  <span class="text-slate-400 block text-xs"
+                    >Identificación:</span
+                  >
+                  <span class="text-white font-mono">C.C. 1.043.660.168</span>
+                </div>
+                <div>
+                  <span class="text-slate-400 block text-xs">Ubicación:</span>
+                  <span class="text-white font-medium"
+                    >Carrera 10b #45c2-117, Barranquilla</span
+                  >
+                </div>
+                <div>
+                  <span class="text-slate-400 block text-xs"
+                    >Contacto Directo:</span
+                  >
+                  <span class="text-brand-cyan font-mono"
+                    >3223197596 / 3043343354</span
+                  >
+                </div>
+                <div>
+                  <span class="text-slate-400 block text-xs"
+                    >Correo Electrónico:</span
+                  >
+                  <span class="text-brand-cyan font-mono"
+                    >isajardmendoza@gmail.com</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="glass-card p-6 rounded-3xl space-y-3">
+              <h3
+                class="text-sm font-bold text-white uppercase font-mono tracking-wider text-brand-cyan text-center sm:text-left"
+              >
+                Sistemas & Herramientas
+              </h3>
+              <div class="flex flex-wrap justify-center sm:justify-start gap-2">
+                <span
+                  class="px-3 py-1 rounded-lg bg-brand-surface border border-brand-border text-xs text-slate-300"
+                  >Sistemas Operativos</span
+                >
+                <span
+                  class="px-3 py-1 rounded-lg bg-brand-surface border border-brand-border text-xs text-slate-300"
+                  >Excel Avanzado</span
+                >
+                <span
+                  class="px-3 py-1 rounded-lg bg-brand-surface border border-brand-border text-xs text-slate-300"
+                  >Gestores SQL</span
+                >
+                <span
+                  class="px-3 py-1 rounded-lg bg-brand-surface border border-brand-border text-xs text-slate-300"
+                  >CRM Platforms</span
+                >
+                <span
+                  class="px-3 py-1 rounded-lg bg-brand-surface border border-brand-border text-xs text-slate-300"
+                  >Git & GitHub</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 3: EXPERIENCIA -->
+      <section id="page-experiencia" class="page-section space-y-8">
+        <div
+          class="border-b border-brand-border/60 pb-6 flex flex-col md:flex-row md:items-center justify-between gap-4 text-center md:text-left"
+        >
+          <div>
+            <span
+              class="text-xs font-mono text-brand-cyan uppercase tracking-wider font-semibold"
+              >Trayectoria</span
+            >
+            <h2 class="text-3xl font-extrabold text-white mt-1">
+              Experiencia Laboral
+            </h2>
+          </div>
+          <div
+            class="text-xs font-mono text-slate-400 bg-brand-surface px-4 py-2 rounded-xl border border-brand-border self-center md:self-auto"
+          >
+            <i class="fa-solid fa-building text-brand-blue mr-1.5"></i> Roles en
+            Desarrollo & Marketing
+          </div>
+        </div>
+
+        <!-- Experience Timeline -->
+        <div class="space-y-6">
+          <!-- Role 1 -->
+          <div
+            class="glass-panel p-6 sm:p-8 rounded-3xl relative overflow-hidden border-l-4 border-l-brand-blue"
+          >
+            <div
+              class="flex flex-col md:flex-row md:items-start justify-between gap-4 border-b border-brand-border/60 pb-4 text-center md:text-left"
+            >
+              <div>
+                <span
+                  class="px-2.5 py-1 rounded-md bg-brand-blue/10 text-brand-cyan border border-brand-blue/30 text-xs font-mono font-semibold uppercase inline-block"
+                  >Marketing & Web</span
+                >
+                <h3 class="text-xl font-bold text-white mt-2">
+                  Practicante de Marketing & Gestión Web
+                </h3>
+                <p class="text-brand-blue font-semibold text-sm">
+                  Macoser S.A.
+                </p>
+              </div>
+              <div
+                class="text-center md:text-right font-mono text-xs text-slate-400 space-y-1"
+              >
+                <div>
+                  <i class="fa-regular fa-calendar text-brand-cyan mr-1.5"></i>
+                  26 de mayo 2025 - 22 de noviembre 2025
+                </div>
+                <div>
+                  <i class="fa-solid fa-location-dot mr-1.5"></i> Calle 45
+                  #39-07, Barranquilla - Atlántico
+                </div>
+                <div class="text-slate-500">Tel: 317.097.3573</div>
+              </div>
+            </div>
+
+            <div class="mt-4 space-y-2 text-sm text-slate-300">
+              <div class="flex items-start gap-3">
+                <i class="fa-solid fa-check text-brand-cyan mt-1"></i>
+                <span
+                  >Manejo integral de CRM corporativo para seguimiento de
+                  clientes y campañas.</span
+                >
+              </div>
+              <div class="flex items-start gap-3">
+                <i class="fa-solid fa-check text-brand-cyan mt-1"></i>
+                <span
+                  >Gestión, actualización y mantenimiento continuo de las
+                  páginas web corporativas de la empresa.</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Role 2 -->
+          <div
+            class="glass-panel p-6 sm:p-8 rounded-3xl relative overflow-hidden border-l-4 border-l-brand-violet"
+          >
+            <div
+              class="flex flex-col md:flex-row md:items-start justify-between gap-4 border-b border-brand-border/60 pb-4 text-center md:text-left"
+            >
+              <div>
+                <span
+                  class="px-2.5 py-1 rounded-md bg-brand-violet/10 text-brand-violet border border-brand-violet/30 text-xs font-mono font-semibold uppercase inline-block"
+                  >Desarrollo Software</span
+                >
+                <h3 class="text-xl font-bold text-white mt-2">
+                  Responsable de Desarrollo e Implementación de Software
+                </h3>
+                <p class="text-brand-violet font-semibold text-sm">
+                  Metrología, Instrumentación y Control MIC S.A.S.
+                </p>
+              </div>
+              <div
+                class="text-center md:text-right font-mono text-xs text-slate-400 space-y-1"
+              >
+                <div>
+                  <i
+                    class="fa-regular fa-calendar text-brand-violet mr-1.5"
+                  ></i>
+                  Ene 2023 - Abr 2023
+                </div>
+                <div>
+                  <i class="fa-solid fa-location-dot mr-1.5"></i> Carrera 46
+                  #54-58, Barranquilla
+                </div>
+                <div class="text-slate-500">Tel: 3770235 - 3156342418</div>
+              </div>
+            </div>
+
+            <div class="mt-4 space-y-2 text-sm text-slate-300">
+              <div class="flex items-start gap-3">
+                <i class="fa-solid fa-check text-brand-violet mt-1"></i>
+                <span
+                  >Desarrollo e implementación del software core
+                  corporativo.</span
+                >
+              </div>
+              <div class="flex items-start gap-3">
+                <i class="fa-solid fa-check text-brand-violet mt-1"></i>
+                <span
+                  >Creación, estructuración y optimización de su respectiva base
+                  de datos relacional.</span
+                >
+              </div>
+              <div class="flex items-start gap-3">
+                <i class="fa-solid fa-check text-brand-violet mt-1"></i>
+                <span>Implementación del programa base operativo.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Role 3 -->
+          <div
+            class="glass-panel p-6 sm:p-8 rounded-3xl relative overflow-hidden border-l-4 border-l-emerald-500"
+          >
+            <div
+              class="flex flex-col md:flex-row md:items-start justify-between gap-4 border-b border-brand-border/60 pb-4 text-center md:text-left"
+            >
+              <div>
+                <span
+                  class="px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs font-mono font-semibold uppercase inline-block"
+                  >Pasantía Inicial</span
+                >
+                <h3 class="text-xl font-bold text-white mt-2">
+                  Pasante Responsable de Desarrollo de Software
+                </h3>
+                <p class="text-emerald-400 font-semibold text-sm">
+                  Metrología, Instrumentación y Control MIC S.A.S.
+                </p>
+              </div>
+              <div
+                class="text-center md:text-right font-mono text-xs text-slate-400 space-y-1"
+              >
+                <div>
+                  <i class="fa-regular fa-calendar text-emerald-400 mr-1.5"></i>
+                  Jul 2022 - Ene 2023
+                </div>
+                <div>
+                  <i class="fa-solid fa-location-dot mr-1.5"></i> Carrera 46
+                  #54-58, Barranquilla
+                </div>
+                <div class="text-slate-500">Tel: 3770235 - 3156342418</div>
+              </div>
+            </div>
+
+            <div class="mt-4 space-y-2 text-sm text-slate-300">
+              <div class="flex items-start gap-3">
+                <i class="fa-solid fa-check text-emerald-400 mt-1"></i>
+                <span
+                  >Fase de pasantía orientada al diseño preliminar e
+                  implementación del software de la compañía.</span
+                >
+              </div>
+              <div class="flex items-start gap-3">
+                <i class="fa-solid fa-check text-emerald-400 mt-1"></i>
+                <span
+                  >Modelado y estructuración inicial de bases de datos.</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 4: EDUCACIÓN -->
+      <section id="page-educacion" class="page-section space-y-8">
+        <div class="border-b border-brand-border/60 pb-6 text-center">
+          <span
+            class="text-xs font-mono text-brand-cyan uppercase tracking-wider font-semibold"
+            >Formación Académica</span
+          >
+          <h2 class="text-3xl font-extrabold text-white mt-1">
+            Educación & Certificados
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Edu 1 -->
+          <div class="glass-card p-6 rounded-3xl space-y-4">
+            <div class="flex items-center justify-between">
+              <span
+                class="w-10 h-10 rounded-xl bg-brand-blue/10 border border-brand-blue/30 flex items-center justify-center text-brand-cyan font-bold"
+              >
+                SENA
+              </span>
+              <span
+                class="text-xs font-mono text-brand-cyan bg-brand-surface px-3 py-1 rounded-full border border-brand-border"
+              >
+                10 ago 2023 - nov 2025
+              </span>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-white">
+                Tecnólogo en Análisis y Desarrollo de Software
+              </h3>
+              <p class="text-slate-400 text-sm mt-1">
+                Servicio Nacional de Aprendizaje (SENA)
+              </p>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Formación especializada en ciclo completo de desarrollo de
+              software, arquitectura de sistemas, Java backend, gestión de bases
+              de datos SQL e interfaces web.
+            </p>
+          </div>
+
+          <!-- Edu 2 -->
+          <div class="glass-card p-6 rounded-3xl space-y-4">
+            <div class="flex items-center justify-between">
+              <span
+                class="w-10 h-10 rounded-xl bg-brand-violet/10 border border-brand-violet/30 flex items-center justify-center text-brand-violet font-bold"
+              >
+                SENA
+              </span>
+              <span
+                class="text-xs font-mono text-slate-400 bg-brand-surface px-3 py-1 rounded-full border border-brand-border"
+              >
+                2023
+              </span>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-white">
+                Técnico en Programación de Software
+              </h3>
+              <p class="text-slate-400 text-sm mt-1">
+                Servicio Nacional de Aprendizaje (SENA)
+              </p>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Fundamentos de lógica de programación, estructuras de datos,
+              desarrollo de algoritmos y bases de datos relacionales.
+            </p>
+          </div>
+
+          <!-- Edu 3 -->
+          <div class="glass-card p-6 rounded-3xl space-y-4">
+            <div class="flex items-center justify-between">
+              <span
+                class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold"
+              >
+                COL
+              </span>
+              <span
+                class="text-xs font-mono text-slate-400 bg-brand-surface px-3 py-1 rounded-full border border-brand-border"
+              >
+                2021
+              </span>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-white">Bachiller Académico</h3>
+              <p class="text-slate-400 text-sm mt-1">Colegio Boston</p>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Título secundario académico con énfasis en formación integral y
+              ciencias básicas.
+            </p>
+          </div>
+
+          <!-- Courses -->
+          <div
+            class="glass-card p-6 rounded-3xl space-y-4 bg-gradient-to-br from-brand-surface to-brand-card"
+          >
+            <div
+              class="flex items-center gap-2 text-brand-cyan text-sm font-mono font-bold uppercase"
+            >
+              <i class="fa-solid fa-award"></i> Cursos & Certificaciones SENA
+            </div>
+            <ul class="space-y-3">
+              <li class="border-b border-brand-border/40 pb-2">
+                <div class="text-white text-sm font-semibold">
+                  Especialista en diseñar páginas web con HTML y JAVASCRIPT
+                </div>
+                <div class="text-xs font-mono text-slate-400">SENA, 2023</div>
+              </li>
+              <li>
+                <div class="text-white text-sm font-semibold">
+                  Creatividad e innovación
+                </div>
+                <div class="text-xs font-mono text-slate-400">SENA, 2022</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 5: REFERENCIAS -->
+      <section id="page-referencias" class="page-section space-y-8">
+        <div class="border-b border-brand-border/60 pb-6 text-center">
+          <span
+            class="text-xs font-mono text-brand-cyan uppercase tracking-wider font-semibold"
+            >Respaldos</span
+          >
+          <h2 class="text-3xl font-extrabold text-white mt-1">
+            Referencias Verificables
+          </h2>
+        </div>
+
+        <!-- References Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Familiar References -->
+          <div class="space-y-4">
+            <h3
+              class="text-lg font-bold text-white flex items-center justify-center md:justify-start gap-2 border-b border-brand-border/60 pb-2"
+            >
+              <i class="fa-solid fa-people-roof text-brand-blue"></i>
+              Referencias Familiares
+            </h3>
+
+            <div class="glass-card p-6 rounded-2xl space-y-2">
+              <h4 class="text-base font-bold text-white">
+                Humberto Cesar Maldonado Salas
+              </h4>
+              <span class="text-xs font-mono text-brand-cyan block"
+                >Contador Público</span
+              >
+              <div class="pt-2 text-xs text-slate-400 space-y-1">
+                <div class="flex items-start gap-2">
+                  <i
+                    class="fa-solid fa-location-dot mt-0.5 text-brand-blue"
+                  ></i>
+                  <span>Carrera 10b #45c2-117 - La Victoria</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i class="fa-solid fa-phone text-brand-blue"></i>
+                  <span>3173202017</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl space-y-2">
+              <h4 class="text-base font-bold text-white">
+                Roger Danys Mendoza Hernández
+              </h4>
+              <span class="text-xs font-mono text-brand-cyan block"
+                >Analista de datos</span
+              >
+              <div class="pt-2 text-xs text-slate-400 space-y-1">
+                <div class="flex items-start gap-2">
+                  <i
+                    class="fa-solid fa-location-dot mt-0.5 text-brand-blue"
+                  ></i>
+                  <span>Calle 60 # 21B-122</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i class="fa-solid fa-phone text-brand-blue"></i>
+                  <span>3043343354 - 3204490391</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Personal References -->
+          <div class="space-y-4">
+            <h3
+              class="text-lg font-bold text-white flex items-center justify-center md:justify-start gap-2 border-b border-brand-border/60 pb-2"
+            >
+              <i class="fa-solid fa-user-check text-brand-violet"></i>
+              Referencias Personales
+            </h3>
+
+            <div class="glass-card p-6 rounded-2xl space-y-2">
+              <h4 class="text-base font-bold text-white">
+                Michelle Daiana Sierra Viva
+              </h4>
+              <span class="text-xs font-mono text-brand-violet block"
+                >CEO de GV Asociados servicios y soluciones</span
+              >
+              <div class="pt-2 text-xs text-slate-400 space-y-1">
+                <div class="flex items-start gap-2">
+                  <i
+                    class="fa-solid fa-location-dot mt-0.5 text-brand-violet"
+                  ></i>
+                  <span>Calle 95A #43-27</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i class="fa-solid fa-phone text-brand-violet"></i>
+                  <span>3026433084</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl space-y-2">
+              <h4 class="text-base font-bold text-white">
+                Julián Felipe John Correa
+              </h4>
+              <span class="text-xs font-mono text-brand-violet block"
+                >Agente Bilingüe</span
+              >
+              <div class="pt-2 text-xs text-slate-400 space-y-1">
+                <div class="flex items-start gap-2">
+                  <i
+                    class="fa-solid fa-location-dot mt-0.5 text-brand-violet"
+                  ></i>
+                  <span>Calle 10 # 26-54 Country Club Villas</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i class="fa-solid fa-phone text-brand-violet"></i>
+                  <span>3205767017</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 6: CONTACTO -->
+      <section id="page-contacto" class="page-section space-y-8">
+        <div class="border-b border-brand-border/60 pb-6 text-center">
+          <span
+            class="text-xs font-mono text-brand-cyan uppercase tracking-wider font-semibold"
+            >Canales Oficiales</span
+          >
+          <h2 class="text-3xl font-extrabold text-white mt-1">
+            Información de Contacto
+          </h2>
+        </div>
+
+        <div class="max-w-2xl mx-auto space-y-6">
+          <div
+            class="glass-panel p-8 rounded-3xl space-y-6 text-center relative overflow-hidden"
+          >
+            <div
+              class="absolute top-0 right-0 w-32 h-32 bg-brand-blue/10 rounded-full blur-3xl pointer-events-none"
+            ></div>
+
+            <div
+              class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-brand-blue to-brand-violet mx-auto flex items-center justify-center text-white text-2xl shadow-lg shadow-brand-blue/20"
+            >
+              <i class="fa-solid fa-address-book"></i>
+            </div>
+
+            <div>
+              <h3 class="text-xl font-bold text-white">
+                Isajar Mendoza Maldonado
+              </h3>
+              <p class="text-brand-cyan text-sm font-mono mt-1">
+                C.C. 1.043.660.168
+              </p>
+            </div>
+
+            <div
+              class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left pt-4 border-t border-brand-border/60"
+            >
+              <div
+                class="bg-brand-surface/80 p-4 rounded-2xl border border-brand-border/40 space-y-1"
+              >
+                <span class="text-xs text-slate-400 block font-mono"
+                  ><i class="fa-solid fa-phone text-brand-blue mr-1"></i>
+                  Teléfonos</span
+                >
+                <span class="text-white font-mono text-sm block"
+                  >3223197596</span
+                >
+                <span class="text-white font-mono text-sm block"
+                  >3043343354</span
+                >
+              </div>
+
+              <div
+                class="bg-brand-surface/80 p-4 rounded-2xl border border-brand-border/40 space-y-1"
+              >
+                <span class="text-xs text-slate-400 block font-mono"
+                  ><i class="fa-solid fa-envelope text-brand-violet mr-1"></i>
+                  Correo Electrónico</span
+                >
+                <a
+                  href="mailto:isajardmendoza@gmail.com"
+                  class="text-brand-cyan font-mono text-xs sm:text-sm block hover:underline truncate"
+                  >isajardmendoza@gmail.com</a
+                >
+              </div>
+            </div>
+
+            <div
+              class="bg-brand-surface/80 p-4 rounded-2xl border border-brand-border/40 text-left space-y-1"
+            >
+              <span class="text-xs text-slate-400 block font-mono"
+                ><i class="fa-solid fa-location-dot text-emerald-400 mr-1"></i>
+                Dirección Física</span
+              >
+              <span class="text-white text-sm block"
+                >Carrera 10b #45c2-117, Barranquilla, Colombia</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="border-t border-brand-border/50 py-6 px-4 lg:px-8 text-center text-xs text-slate-500 font-mono"
+    >
+      <div
+        class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4"
+      >
+        <div>
+          © 2026 Isajar Mendoza Maldonado. Todos los derechos reservados.
+        </div>
+        <div class="flex items-center gap-4">
+          <span>C.C. 1.043.660.168</span>
+          <span>•</span>
+          <span>Barranquilla, Colombia</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- SPA Router Script -->
+    <script>
+      function navigateTo(pageId) {
+        // Hide all pages
+        document.querySelectorAll(".page-section").forEach((section) => {
+          section.classList.remove("active");
+        });
+
+        // Deactivate all nav buttons
+        document.querySelectorAll(".nav-btn").forEach((btn) => {
+          btn.classList.remove("active");
+        });
+
+        // Show target page
+        const targetPage = document.getElementById(`page-${pageId}`);
+        if (targetPage) {
+          targetPage.classList.add("active");
+        }
+
+        // Activate target nav button
+        const targetNav = document.getElementById(`nav-${pageId}`);
+        if (targetNav) {
+          targetNav.classList.add("active");
+        }
+
+        // Scroll to top smoothly
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+        // Update URL hash without reload
+        history.pushState(null, null, `#${pageId}`);
+      }
+
+      function toggleMobileMenu() {
+        const menu = document.getElementById("mobile-menu");
+        menu.classList.toggle("hidden");
+      }
+
+      // Handle initial route on page load based on Hash
+      window.addEventListener("DOMContentLoaded", () => {
+        const hash = window.location.hash.replace("#", "");
+        if (
+          hash &&
+          [
+            "inicio",
+            "sobre-mi",
+            "experiencia",
+            "educacion",
+            "referencias",
+            "contacto",
+          ].includes(hash)
+        ) {
+          navigateTo(hash);
+        } else {
+          navigateTo("inicio");
+        }
+      });
+    </script>
+  </body>
+</html>
